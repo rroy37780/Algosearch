@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div id="modal-overlay">
+        <div id="search_results">
+            <h3 class="srh" id="first_line">Search result heading 1</h3>
+            <span class="src">Search result content 1</span>
+            <h3 class="srh">Search result heading 2</h3>
+            <span class="src">Search result content 2</span>
+            <h3 class="srh">Search result heading 3</h3>
+            <span class="src">Search result content 3</span>
+            <h3 class="srh">Search result heading 4</h3>
+            <span class="src">Search result content4</span>
+            <h3 class="srh">Search result heading 5</h3>
+            <span class="src">Search result content 5</span>
+            <h3 class="srh">Search result heading 6</h3>
+            <span class="src">Search result content 6</span>
+        </div>
+        <div id="header_results">
+            <form action="" id="form">
+                <input type="text" name="question" id="question_results" placeholder="Type your question here">
+                <button type="submit" id="btn_results">Search</button>
+            </form>
+        </div>
+    </div>
+    <div id="modal-dialog">
+        <div id="modal-box">
+            <div id="close-btn-wrapper">
+                <button id="close-modal-btn">
+                    Close
+                </button>
+            </div>
+            <div id="modal-content">
+                Problem description will be here
+            </div>
+        </div>
+    </div>
+    <div id="loading">
+        <div class="spinner"></div>
+        <p>Loading Results</p>
+    </div>
+    <script src="/resultHelper.js"></script>
+</body>
+</html>

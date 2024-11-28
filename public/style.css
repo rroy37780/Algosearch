@@ -1,0 +1,128 @@
+#topHeading{
+    color:green;
+    text-align: center;
+    background-color: antiquewhite;
+    font-size: 3em;
+    font-family:'sans-serif';
+    z-index: 1;
+    position: fixed;
+    width:100%;
+    top: 0;
+    display: block;
+    margin-bottom:4em ;
+    margin-top: 0;
+}
+#firstText{
+    /* text-align: center; */
+    display: block;
+    /* margin-top:3em; */
+    margin-bottom: 0.2em;
+}
+#question{
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    /* width: 50%; */
+    /* height: 1.5em; */
+    padding: 0;
+    font-size: 1.5em;
+}
+#btn{
+    display: block;
+    margin: auto;
+    width:5em;
+    font-size: 1.5em;
+    padding: 0;
+}
+.container{
+    display: flex;
+    height: 100vh;
+    width:100vw;
+    justify-content: center;
+    align-items: center;
+}
+#question_results{
+    text-align: center;
+    display: inline;
+    padding: 0;
+    font-size: 1.5em;
+}
+#btn_results{
+    display: inline;
+    width:5em;
+    font-size: 1.5em;
+    padding: 0;
+}
+#header_results{
+    display: block;
+    position: fixed;
+    top: 0.5em;
+    z-index: 1;
+}
+#first_line{
+    margin-top:3em;
+}
+/* body{
+    overflow: hidden;
+} */
+#modal-dialog{
+    display: none;
+    height: 100vh;
+    width: 100vw;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0,0,0,0.5);
+}
+#modal-box{
+    display: block;
+    margin: auto;
+    height: 8em;
+    width: 20em;
+    border: 0.5em solid green;
+    background-color: ghostwhite;
+}
+#close-btn-wrapper{
+    display: flex;
+}
+#close-modal-btn{
+    margin-left: auto;
+    cursor: pointer;
+}
+#modal-content{
+    text-align: center;
+    margin-top: 2em;
+}
+.src{
+    cursor: pointer;
+}
+#search_results{
+    display: none;
+}
+
+#loading{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+}
+
+.spinner {
+    border: 0.5em solid #f3f3f3;
+    border-top: 0.5em solid #3498db;
+    border-radius: 50%;
+    width: 3em;
+    height: 3em;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+    
+}
