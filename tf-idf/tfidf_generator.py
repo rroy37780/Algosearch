@@ -82,7 +82,7 @@ def generate_idf_vector(doc_freq_matrix,keywords):
         for row in doc_freq_matrix:
             if(row[index]>0):
                 cnt+=1
-        idf=math.log10(N/cnt)
+        idf=round(math.log10(N/cnt),5)
         idf_list.append(idf)
     with open('idf.txt','w',encoding='utf-8',errors='ignore') as f:
         for idf in idf_list:
@@ -105,16 +105,16 @@ def generate_tfidf_matrix(tf_matrix,idf_list):
     n_cols=len(tf_matrix[0])
     for i in range(n_rows):
         for j in range(n_cols):
-            tfidf_matrix[i][j]=tf_matrix[i][j]*idf_list[j]
+            tfidf_matrix[i][j]=round(tf_matrix[i][j]*idf_list[j],5)
     with open('tfidf_matrix.txt','w',encoding='utf-8',errors='ignore') as f:
         for row in tfidf_matrix:
-            row_string="".join(map(str,row))
+            row_string=", ".join(map(str,row))
             f.write(row_string+'\n')
     return tfidf_matrix
 
 path='/home/rishabh/algozenith_2024/dsa_search_engine/search_engine/scraper/valid_data'
-# N=2368 # total number of documents
-N=10
+N=2368 # total number of documents
+
 keywords,document_matrix=generate_keywords_and_document_matrix(path)
 print("Keywords and document matrix generated")
 
