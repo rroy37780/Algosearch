@@ -112,23 +112,25 @@ def generate_tfidf_matrix(tf_matrix,idf_list):
             f.write(row_string+'\n')
     return tfidf_matrix
 
-path='/home/rishabh/algozenith_2024/dsa_search_engine/search_engine/scraper/valid_data'
-N=2368 # total number of documents
+if __name__=="__main__":
 
-keywords,document_matrix=generate_keywords_and_document_matrix(path)
-print("Keywords and document matrix generated")
+    path='/home/rishabh/algozenith_2024/dsa_search_engine/search_engine/scraper/valid_data'
+    N=2368 # total number of documents
 
-keyword_indices = {keyword: idx for idx, keyword in enumerate(keywords)}
+    keywords,document_matrix=generate_keywords_and_document_matrix(path)
+    print("Keywords and document matrix generated")
 
-doc_freq_matrix=generate_doc_freq_matrix(document_matrix,keyword_indices)
-print("doc_freq_matrix generated")
+    keyword_indices = {keyword: idx for idx, keyword in enumerate(keywords)}
 
-idf_list=generate_idf_vector(doc_freq_matrix,keywords)
-print("idf vector generated")
+    doc_freq_matrix=generate_doc_freq_matrix(document_matrix,keyword_indices)
+    print("doc_freq_matrix generated")
 
-tf_matrix=generate_tf_matrix(doc_freq_matrix)
-print("tf_matrix generated")
+    idf_list=generate_idf_vector(doc_freq_matrix,keywords)
+    print("idf vector generated")
 
-tfidf_matrix=generate_tfidf_matrix(tf_matrix,idf_list)
-print("tfidf_matrix generated")
+    tf_matrix=generate_tf_matrix(doc_freq_matrix)
+    print("tf_matrix generated")
+
+    tfidf_matrix=generate_tfidf_matrix(tf_matrix,idf_list)
+    print("tfidf_matrix generated")
 
