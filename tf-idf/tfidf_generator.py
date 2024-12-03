@@ -8,10 +8,10 @@ from word2number import w2n
 import math
 
 
-nltk.download('stopwords')
-nltk.download('punkt')
-nltk.download('wordnet')
-nltk.download('omw-1.4')
+# nltk.download('stopwords')
+# nltk.download('punkt')
+# nltk.download('wordnet')
+# nltk.download('omw-1.4')
 
 def preprocess(text):
     text=re.sub(r'[^\w\s]','',text) #patten, replacement, string
@@ -46,9 +46,20 @@ def preprocess(text):
 def generate_keywords_and_document_matrix(path):
     all_keywords=[]
     document_matrix=[]
+    all_titles=[]
+    with open(path+'/titles.txt','r',encoding='utf-8',errors='ignore') as f:
+        for line in f:
+            all_titles.append(line[1:])
     for i in range(1,N+1):
         with open(f'{path}/problem_{i}/problem_{i}.txt','r',encoding='utf-8',errors='ignore') as f:
             filecontent=f.read()
+            #include title
+            title=all_titles[i-1]
+            filecontent=title+filecontent
+            #remove example content till topic
+            example_index=filecontent.find("Example 1:")
+            topic_index=filecontent.rfind("Topics")
+            filecontent=filecontent[:example_index]+filecontent[topic_index:]
             preprocessed_file_content=preprocess(filecontent)
             document_matrix.append(preprocessed_file_content)
             all_keywords.extend(preprocessed_file_content)
