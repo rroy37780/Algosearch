@@ -4,6 +4,9 @@ This code accepts the query string entered by user as input, preprocesses it and
 import numpy as np
 from tfidf_generator import preprocess #user defined module and function
 import time
+import sys
+import json
+import os
 """
 This function calculates cosine similarity score of query string with all document vectors
 """
@@ -40,31 +43,60 @@ def calculate_cosine_similarity(tfidf_matrix,query_tfidf_vector):
 
 if __name__=="__main__":
     start_time=time.time()
-    query=" Maximum Area of Longest Diagonal Rectangle. "
+    # query=" Maximum Area of Longest Diagonal Rectangle. "
+    query=sys.argv[1] #get the query from command line (for integration with node backend)
 
     preprocessed_query=preprocess(query)
+
+    # print(os.getcwd())
 
     keywords=[]
     idf_list=[]
     tfidf_matrix=[]
-    with open('keywords.txt','r') as f:
+
+    titles=[]
+    links=[]
+
+    with open(f'{os.getcwd()}/tf-idf/keywords.txt','r') as f:
         for line in f:
             keywords.append(line.strip())
-    with open('idf.txt','r') as f:
+
+    with open(f'{os.getcwd()}/tf-idf/idf.txt','r') as f:
         for idf in f:
             idf_list.append(float(idf.strip()))
-    with open('tfidf_matrix.txt','r') as f:
+
+    with open(f'{os.getcwd()}/tf-idf/tfidf_matrix.txt','r') as f:
         for line in f:
             tfidf_matrix.append(list(map(float,line.split(','))))
+
+    with open(f'{os.getcwd()}/scraper/valid_data/titles.txt') as f:
+        for title in f:
+            titles.append(title.strip())
+
+    with open(f'{os.getcwd()}/scraper/valid_data/links.txt') as f:
+        for link in f:
+            links.append(link.strip())
 
     keyword_indices={keyword:idx for idx,keyword in enumerate(keywords)}
     query_vector=generate_query_vector(preprocessed_query,keyword_indices)
     query_tfidf_vector=generate_tfidf_vector(query_vector,idf_list)
 
     top_5_docs=calculate_cosine_similarity(tfidf_matrix,query_tfidf_vector)[:5]
+    
+    results=[]
+    for item in top_5_docs:
+        idx=item[0]
+        score=item[1]
+        title=titles[idx-1]
+        link=links[idx-1]
+        body=""
+        with open(f'{os.getcwd()}/scraper/valid_data/problem_{idx}/problem_{idx}.txt') as f:
+            fileContent=f.read()
+            body+=fileContent
+        results.append({'title':title,'link':link,'body':fileContent,'link':link})
 
     end_time=time.time()
 
-    print("Time Taken:",end_time-start_time)
+    # print("Time Taken:",end_time-start_time)
 
-    print(top_5_docs)
+    print(json.dumps(results))
