@@ -1,2 +1,3 @@
 node_modules/
 venv/
+tf-idf/tfidf_matrix.txt

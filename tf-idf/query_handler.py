@@ -7,6 +7,8 @@ import time
 import sys
 import json
 import os
+
+import zlib
 """
 This function calculates cosine similarity score of query string with all document vectors
 """
@@ -41,6 +43,26 @@ def calculate_cosine_similarity(tfidf_matrix,query_tfidf_vector):
 
     return ordered_doc_score
 
+def zlib_matrix_loader(file_path):
+    # Read and decompress the zlib file
+    with open(file_path, 'rb') as f:
+        compressed_data = f.read()
+        decompressed_data = zlib.decompress(compressed_data)
+
+    # Decode the decompressed data into a string
+    decompressed_text = decompressed_data.decode('utf-8')
+
+    # Process each line, stripping trailing commas and converting to float
+    matrix = []
+    for line in decompressed_text.splitlines():
+        # Clean the line by removing any trailing commas
+        clean_line = line.rstrip(',').strip()
+        # Convert the cleaned line to a list of floats
+        matrix.append(list(map(float, clean_line.split(','))))
+
+    return matrix
+
+
 if __name__=="__main__":
     start_time=time.time()
     # query=" Maximum Area of Longest Diagonal Rectangle. "
@@ -52,7 +74,7 @@ if __name__=="__main__":
 
     keywords=[]
     idf_list=[]
-    tfidf_matrix=[]
+    # tfidf_matrix=[]
 
     titles=[]
     links=[]
@@ -65,9 +87,11 @@ if __name__=="__main__":
         for idf in f:
             idf_list.append(float(idf.strip()))
 
-    with open(f'{os.getcwd()}/tf-idf/tfidf_matrix.txt','r') as f:
-        for line in f:
-            tfidf_matrix.append(list(map(float,line.split(','))))
+    # with open(f'{os.getcwd()}/tf-idf/tfidf_matrix.txt','r') as f:
+    #     for line in f:
+    #         tfidf_matrix.append(list(map(float,line.split(','))))
+
+    tfidf_matrix=zlib_matrix_loader(f'{os.getcwd()}/tf-idf/tfidf_compressed.zlib')
 
     with open(f'{os.getcwd()}/scraper/valid_data/titles.txt') as f:
         for title in f:
