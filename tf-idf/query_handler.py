@@ -71,40 +71,40 @@ if __name__=="__main__":
     # for debugging commenting from here ...
     preprocessed_query=preprocess(query)
 
-    # # print(os.getcwd())
+    # print(os.getcwd())
 
-    # keywords=[]
-    # idf_list=[]
-    # # tfidf_matrix=[]
+    keywords=[]
+    idf_list=[]
+    # tfidf_matrix=[]
 
-    # titles=[]
-    # links=[]
+    titles=[]
+    links=[]
 
-    # with open(f'{os.getcwd()}/tf-idf/keywords.txt','r') as f:
+    with open(f'{os.getcwd()}/tf-idf/keywords.txt','r') as f:
+        for line in f:
+            keywords.append(line.strip())
+
+    with open(f'{os.getcwd()}/tf-idf/idf.txt','r') as f:
+        for idf in f:
+            idf_list.append(float(idf.strip()))
+
+    # with open(f'{os.getcwd()}/tf-idf/tfidf_matrix.txt','r') as f:
     #     for line in f:
-    #         keywords.append(line.strip())
+    #         tfidf_matrix.append(list(map(float,line.split(','))))
 
-    # with open(f'{os.getcwd()}/tf-idf/idf.txt','r') as f:
-    #     for idf in f:
-    #         idf_list.append(float(idf.strip()))
+    tfidf_matrix=zlib_matrix_loader(f'{os.getcwd()}/tf-idf/tfidf_compressed.zlib')
 
-    # # with open(f'{os.getcwd()}/tf-idf/tfidf_matrix.txt','r') as f:
-    # #     for line in f:
-    # #         tfidf_matrix.append(list(map(float,line.split(','))))
+    with open(f'{os.getcwd()}/scraper/valid_data/titles.txt') as f:
+        for title in f:
+            titles.append(title.strip())
 
-    # tfidf_matrix=zlib_matrix_loader(f'{os.getcwd()}/tf-idf/tfidf_compressed.zlib')
+    with open(f'{os.getcwd()}/scraper/valid_data/links.txt') as f:
+        for link in f:
+            links.append(link.strip())
 
-    # with open(f'{os.getcwd()}/scraper/valid_data/titles.txt') as f:
-    #     for title in f:
-    #         titles.append(title.strip())
-
-    # with open(f'{os.getcwd()}/scraper/valid_data/links.txt') as f:
-    #     for link in f:
-    #         links.append(link.strip())
-
-    # keyword_indices={keyword:idx for idx,keyword in enumerate(keywords)}
-    # query_vector=generate_query_vector(preprocessed_query,keyword_indices)
-    # query_tfidf_vector=generate_tfidf_vector(query_vector,idf_list)
+    keyword_indices={keyword:idx for idx,keyword in enumerate(keywords)}
+    query_vector=generate_query_vector(preprocessed_query,keyword_indices)
+    query_tfidf_vector=generate_tfidf_vector(query_vector,idf_list)
 
     # top_5_docs=calculate_cosine_similarity(tfidf_matrix,query_tfidf_vector)[:5]
     
