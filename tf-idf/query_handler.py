@@ -69,7 +69,7 @@ if __name__=="__main__":
     query=sys.argv[1] #get the query from command line (for integration with node backend)
 
     # for debugging commenting from here ...
-    # preprocessed_query=preprocess(query)
+    preprocessed_query=preprocess(query)
 
     # # print(os.getcwd())
 
