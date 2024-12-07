@@ -3,3 +3,4 @@ stopwords
 omw
 omw-1.4
 punkt
+punkt_tab
