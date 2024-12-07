@@ -13,5 +13,7 @@ if not os.path.exists(os.path.join(nltk_data_path, 'corpora/wordnet')):
     nltk.download('wordnet', download_dir=nltk_data_path)
 if not os.path.exists(os.path.join(nltk_data_path, 'corpora/omw-1.4')):
     nltk.download('omw-1.4', download_dir=nltk_data_path)
+if not os.path.exists(os.path.join(nltk_data_path, 'tokenizers/punkt_tab')):
+    nltk.download('punkt_tab', download_dir=nltk_data_path) 
 
 print("NLTK data downloaded successfully.")
