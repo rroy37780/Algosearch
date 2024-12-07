@@ -6,13 +6,13 @@ from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer,WordNetLemmatizer
 from word2number import w2n
 import math
+# nltk.data.path.append('./nltk_data')
 
-
-nltk.download('stopwords')
-nltk.download('punkt')
-nltk.download('wordnet')
-nltk.download('omw-1.4')
-nltk.download('punkt_tab')
+# nltk.download('stopwords')
+# nltk.download('punkt')
+# nltk.download('wordnet')
+# nltk.download('omw-1.4')
+# nltk.download('punkt_tab')
 
 def preprocess(text):
     text=re.sub(r'[^\w\s]','',text) #patten, replacement, string
