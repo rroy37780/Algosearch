@@ -20,7 +20,7 @@ app.get('/results',(req,res)=>{
     console.log(query)
     // const pythonProcess=spawn('python',['./tf-idf/query_handler.py',query])
 
-    const pythonProcess=spawn('python',['./tf-idf/optimized_query_handler.py',query]) //testing optimized query handler
+    const pythonProcess=spawn('python',['./tf-idf/query_handler.py',query]) //testing optimized query handler
     let output='';
     // Collect output from the Python script
     pythonProcess.stdout.on('data', (data) => {
@@ -53,7 +53,7 @@ app.get('/search',(req,res)=>{
     const  query=req.query.query;
 
     console.log(query)
-    const pythonProcess=spawn('python',['./tf-idf/optimized_query_handler.py',query])
+    const pythonProcess=spawn('python',['./tf-idf/query_handler.py',query])
     let output='';
     // Collect output from the Python script
     pythonProcess.stdout.on('data', (data) => {

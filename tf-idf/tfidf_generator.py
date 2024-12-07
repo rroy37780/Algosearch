@@ -6,6 +6,8 @@ from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer,WordNetLemmatizer
 from word2number import w2n
 import math
+from scipy.sparse import csr_matrix, save_npz, load_npz
+import numpy as np
 # nltk.data.path.append('./nltk_data')
 
 # nltk.download('stopwords')
@@ -111,18 +113,17 @@ def generate_tf_matrix(doc_freq_matrix):
         doc_num+=1
     return tf_matrix
 
-def generate_tfidf_matrix(tf_matrix,idf_list):
-    tfidf_matrix=[[0 for _ in range(len(tf_matrix[0]))] for _ in range(N)]
-    n_rows=len(tf_matrix)
-    n_cols=len(tf_matrix[0])
-    for i in range(n_rows):
-        for j in range(n_cols):
-            tfidf_matrix[i][j]=round(tf_matrix[i][j]*idf_list[j],4)
-    with open('tfidf_matrix.txt','w',encoding='utf-8',errors='ignore') as f:
-        for row in tfidf_matrix:
-            row_string=", ".join(map(str,row))
-            f.write(row_string+'\n')
-    return tfidf_matrix
+# Precompute and save the TF-IDF matrix
+def generate_and_save_tfidf_matrix(tf_matrix, idf_list, output_file='tfidf_matrix.npz'):
+    """
+    Generate the TF-IDF matrix and save it as a sparse matrix.
+    """
+    tf_matrix = np.array(tf_matrix, dtype=np.float64)
+    idf_array = np.array(idf_list, dtype=np.float64)
+    tfidf_matrix = tf_matrix * idf_array  # Element-wise multiplication
+    sparse_tfidf = csr_matrix(tfidf_matrix)
+    save_npz(output_file, sparse_tfidf)
+    return sparse_tfidf
 
 if __name__=="__main__":
 
@@ -143,6 +144,6 @@ if __name__=="__main__":
     tf_matrix=generate_tf_matrix(doc_freq_matrix)
     print("tf_matrix generated")
 
-    tfidf_matrix=generate_tfidf_matrix(tf_matrix,idf_list)
-    print("tfidf_matrix generated")
+    tfidf_matrix=generate_and_save_tfidf_matrix(tf_matrix,idf_list)
+    print("tfidf_matrix generated and saved")
 
