@@ -1,1 +1,1 @@
-web: python download_nltk_data.py && node app.js
+web: node app.js
