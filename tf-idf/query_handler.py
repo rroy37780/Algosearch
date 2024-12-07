@@ -106,7 +106,7 @@ if __name__=="__main__":
     query_vector=generate_query_vector(preprocessed_query,keyword_indices)
     query_tfidf_vector=generate_tfidf_vector(query_vector,idf_list)
 
-    # top_5_docs=calculate_cosine_similarity(tfidf_matrix,query_tfidf_vector)[:5]
+    top_5_docs=calculate_cosine_similarity(tfidf_matrix,query_tfidf_vector)[:5]
     
     # results=[]
     # for item in top_5_docs:
