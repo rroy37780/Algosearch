@@ -2,7 +2,10 @@ const express=require('express');
 const {spawn}=require('child_process');
 const app=express();
 
-app.listen(3000);
+const PORT= process.env.PORT || 3000;   
+app.listen(PORT,()=>{
+    console.log("Server is running on Port "+PORT)
+});
 
 app.set('view engine','ejs');
 
