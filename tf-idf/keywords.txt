@@ -2623,7 +2623,6 @@ lca
 lcm
 lcp
 lcpij
-le
 lead
 lead_id
 leaf
@@ -2668,6 +2667,7 @@ lengthj
 lengthsi
 lengthwordi
 lengthwordj
+less
 let
 letl
 letter
