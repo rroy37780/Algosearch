@@ -92,7 +92,7 @@ if __name__=="__main__":
     #     for line in f:
     #         tfidf_matrix.append(list(map(float,line.split(','))))
 
-    # tfidf_matrix=zlib_matrix_loader(f'{os.getcwd()}/tf-idf/tfidf_compressed.zlib')
+    tfidf_matrix=zlib_matrix_loader(f'{os.getcwd()}/tf-idf/tfidf_compressed.zlib')
 
     with open(f'{os.getcwd()}/scraper/valid_data/titles.txt') as f:
         for title in f:
